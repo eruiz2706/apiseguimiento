@@ -4,16 +4,17 @@ namespace App\Helpers;
 use Firebase\JWT\JWT;
 use App\User;
 use DB;
+use Validator;
 
 class JwtAuth{
 
     public $key;
 
     public function __construct(){
-      $this->key ='esta es mi clave secret.123456789***';
+      $this->key ='secret.123456789***';
     }
 
-    public function signup($email,$password,$getToken=null){
+    public function signup($email,$password){
 
         $user = User::where(array(
           'email' =>$email,
@@ -33,20 +34,22 @@ class JwtAuth{
           $jwt  =JWT::encode($token,$this->key,'HS256');
           $decode =JWT::decode($jwt,$this->key,['HS256']);
 
-          if(is_null($getToken)){
-            return $jwt;
-          }else{
-            return $decode;
-          }
+          return [
+            'status'=>'success',
+            'user' =>$decode,
+            'identity'=>$jwt
+          ];
         }else{
           /*se retorna un error*/
             return [
               'status' =>'error',
-              'message'=>'Login ha fallado'.$password
+              'errors' =>[],
+              'message'=>'Usuario o contraseña invalida'
             ];
         }
     }
 
+    /*do*/
     public function checkToken($jwt,$getIdentity=false){
         $auth =false;
 
