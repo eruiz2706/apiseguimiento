@@ -50,8 +50,9 @@ class JwtAuth{
     }
 
     /*do*/
-    public function checkToken($jwt,$getIdentity=false){
-        $auth =false;
+    public function checkToken($jwt){
+        $auth   =false;
+        $decoded=[];
 
         try{
           $decoded  =JWT::decode($jwt,$this->key,['HS256']);
@@ -61,12 +62,8 @@ class JwtAuth{
           $auth =false;
         }
 
-        if(is_object($decoded) && isse($decoded->sub)){
+        if(is_object($decoded) && isset($decoded->sub)){
           $auth =true;
-        }
-
-        if($getIdentity){
-          return $decoded;
         }
 
         return $auth;
