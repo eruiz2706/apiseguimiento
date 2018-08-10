@@ -32,11 +32,10 @@ class JwtAuth{
           ];
 
           $jwt  =JWT::encode($token,$this->key,'HS256');
-          $decode =JWT::decode($jwt,$this->key,['HS256']);
 
           return [
             'status'=>'success',
-            'user' =>$decode,
+            'user' =>$user,
             'identity'=>$jwt
           ];
         }else{
@@ -49,7 +48,6 @@ class JwtAuth{
         }
     }
 
-    /*do*/
     public function checkToken($jwt){
         $auth   =false;
         $decoded=[];
@@ -67,5 +65,21 @@ class JwtAuth{
         }
 
         return $auth;
+    }
+
+    public function decodeToken($jwt){
+        $auth   =false;
+        $decoded=[];
+
+        try{
+          $decoded  =JWT::decode($jwt,$this->key,['HS256']);
+        }catch(\UnexpectedValueException $e){
+
+        }catch(\DomainException $e){
+
+        }
+
+
+        return $decoded;
     }
 }

@@ -6,16 +6,19 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repository\MenuRepository;
 use App\Helpers\JwtAuth;
+use App\Helpers\Shinobipermi;
 
 class MenuController extends Controller
 {
     private $menurepo;
     private $jwtAuth;
+    private $shinobipermi;
 
-    public function __construct(MenuRepository $menurepo){
+    public function __construct(MenuRepository $menurepo,JwtAuth $jwtAuth,Shinobipermi $shinobipermi){
         header('Access-Control-Allow-Origin: *');
-        $this->menurepo =$menurepo;
-        $this->jwtAuth  =new JwtAuth();
+        $this->menurepo     =$menurepo;
+        $this->jwtAuth      =$jwtAuth;
+        $this->shinobipermi =$shinobipermi;
     }
 
     /**
@@ -32,9 +35,12 @@ class MenuController extends Controller
               'message'=>'Autenticacion fallida'
           ];
         }else{
+
+
           $jsonresponse=[
               'status' =>'success',
-              'data'=>$this->menurepo->all()
+              'data'=>$this->menurepo->all(),
+              'das'=>$this->shinobipermi->canrol(1,'users.index')
           ];
         }
 
