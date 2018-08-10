@@ -15,7 +15,7 @@ class MenuController extends Controller
     private $shinobipermi;
 
     public function __construct(MenuRepository $menurepo,JwtAuth $jwtAuth,Shinobipermi $shinobipermi){
-        header('Access-Control-Allow-Origin: *');
+        $this->middleware('cors');
         $this->menurepo     =$menurepo;
         $this->jwtAuth      =$jwtAuth;
         $this->shinobipermi =$shinobipermi;
