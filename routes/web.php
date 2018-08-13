@@ -15,6 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/register','backend\UserController@register');
+
 Route::post('/login','backend\UserController@login');
+Route::post('/register','backend\UserController@register');
+
+Route::middleware(['authToken'])->group(function(){
+  Route::resource('/roles','backend\RoleController');
+});
+
 Route::resource('/menus','backend\MenuController');

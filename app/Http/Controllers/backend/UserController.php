@@ -16,7 +16,7 @@ class UserController extends Controller
    }
 
     public function login(Request $request){
-      $json   =$request->input('json',null);
+        $json   =$request->input('json',null);
         $params =json_decode($json);
 
         $email    =isset($params->email) ? $params->email : null;

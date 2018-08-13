@@ -26,7 +26,7 @@ abstract class Repository implements InterfaceRepository {
     }
 
     public function find($id,$attributes=['*'],$orderBy=[]){
-
+        return $this->model->where('id',$id)->get();
     }
 
     public function findByField($field, $value,$attributes=['*'],$orderBy=[]){
@@ -82,6 +82,21 @@ abstract class Repository implements InterfaceRepository {
     }
 
     public function delete($id){
+        $return =(Object)[
+            'response' => false,
+        ];
+
+        try{
+            $return->response=true;
+            $return->success=$this->model->where('id',$id)->delete();
+        }
+        catch(\Exception $e){
+            Log::info('delete : '.$e->getMessage());
+            $return->response=false;
+            $return->error=$e->getMessage();
+        }
+
+        return $return;
 
     }
 
