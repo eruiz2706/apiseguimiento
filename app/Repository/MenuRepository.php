@@ -9,4 +9,8 @@ class MenuRepository extends Repository{
      parent::__construct($model);
   }
 
+  public function menus(){
+      return $this->model->menus();
+  }
+
 }

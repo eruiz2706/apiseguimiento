@@ -39,7 +39,7 @@ class MenuController extends Controller
 
           $jsonresponse=[
               'status' =>'success',
-              'data'=>$this->menurepo->all(),
+              'data'=>$this->menurepo->menus(),
               'das'=>$this->shinobipermi->canrol(1,'users.index')
           ];
         }

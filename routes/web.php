@@ -22,6 +22,5 @@ Route::post('/register','backend\UserController@register');
 Route::middleware(['authToken'])->group(function(){
   Route::resource('/roles','backend\RoleController');
   Route::resource('/permissions','backend\PermissionController');
+  Route::resource('/menus','backend\MenuController');
 });
-
-Route::resource('/menus','backend\MenuController');
