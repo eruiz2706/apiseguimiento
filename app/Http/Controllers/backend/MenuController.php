@@ -15,11 +15,10 @@ class MenuController extends Controller
     private $shinobipermi;
 
     public function __construct(MenuRepository $menurepo,JwtAuth $jwtAuth,Shinobipermi $shinobipermi){
-        $this->middleware('cors');
         $this->menurepo     =$menurepo;
         $this->jwtAuth      =$jwtAuth;
         $this->shinobipermi =$shinobipermi;
-    }
+  }
 
     /**
      * Display a listing of the resource.
@@ -28,21 +27,11 @@ class MenuController extends Controller
      */
     public function index(Request $request)
     {
-        $hash       =$request->header('Auth',null);
-        if(!$this->jwtAuth->checkToken($hash)){
-          $jsonresponse=[
-              'status' =>'error',
-              'message'=>'Autenticacion fallida'
-          ];
-        }else{
-
-
-          $jsonresponse=[
-              'status' =>'success',
-              'data'=>$this->menurepo->menus(),
-              'das'=>$this->shinobipermi->canrol(1,'users.index')
-          ];
-        }
+        $jsonresponse=[
+            'status' =>'success',
+            'data'=>$this->menurepo->menus(),
+            'fsdd'=>$request->header('Authorization',null)
+        ];
 
         return response()->json($jsonresponse,200);
     }
@@ -65,7 +54,13 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $ed='fs';
+
+       return response()->json(["fsdf",
+       $request->input('secondParameter',null),
+        $request->header('Authorization',null)
+        ]
+       ,200);
     }
 
     /**

@@ -16,8 +16,9 @@ class AuthToken
      */
     public function handle($request, Closure $next)
     {
+
         $jwtAuth    =new JwtAuth();
-        $hash       =$request->header('Auth',null);
+        $hash       =$request->header('Authorization',null);
         if(!$jwtAuth->checkToken($hash)){
           $jsonresponse=[
               'status' =>'error',
