@@ -13,20 +13,30 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
       Role::create([
-        'name' =>'Administrador del sistema',
+        'name' =>'Superusuario',
         'slug'=>'admin',
         'special'=>'all-access'
       ]);
 
       Role::create([
-        'name' =>'Acceso Restringido',
-        'slug' =>'no_access',
-        'special' =>'no-access'
+        'name' =>'Vendedor',
+        'slug'=>'seller',
       ]);
 
       Role::create([
+        'name' =>'Cliente',
+        'slug'=>'client',
+      ]);
+
+      /*Role::create([
+        'name' =>'Acceso Restringido',
+        'slug' =>'no_access',
+        'special' =>'no-access'
+      ]);*/
+
+      /*Role::create([
         'name' =>'Acceso limitado',
         'slug' =>'acceso_limitado',
-      ]);
+      ]);*/
     }
 }

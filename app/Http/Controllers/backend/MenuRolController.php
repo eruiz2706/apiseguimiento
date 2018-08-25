@@ -4,21 +4,22 @@ namespace App\Http\Controllers\backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repository\MenuRepository;
+use App\Repository\MenuRolRepository;
 use App\Helpers\JwtAuth;
 use App\Helpers\Shinobipermi;
 
-class MenuController extends Controller
+class MenuRolController extends Controller
 {
-    private $menurepo;
+
+    private $menurolrepo;
     private $jwtAuth;
     private $shinobipermi;
 
-    public function __construct(MenuRepository $menurepo,JwtAuth $jwtAuth,Shinobipermi $shinobipermi){
-        $this->menurepo     =$menurepo;
+    public function __construct(MenuRolRepository $menurolrepo,JwtAuth $jwtAuth,Shinobipermi $shinobipermi){
+        $this->menurolrepo  =$menurolrepo;
         $this->jwtAuth      =$jwtAuth;
         $this->shinobipermi =$shinobipermi;
-  }
+    }
 
     /**
      * Display a listing of the resource.
@@ -27,12 +28,15 @@ class MenuController extends Controller
      */
     public function index(Request $request)
     {
-        $jsonresponse=[
-            'status' =>'success',
-            'data'=>$this->menurepo->menus()
-        ];
+      $hash         =$request->header('Authorization',null);
+      $tokendecode  =$this->jwtAuth->decodeToken($hash);
 
-        return response()->json($jsonresponse,200);
+      $jsonresponse=[
+          'status' =>'success',
+          'data'=>$this->menurolrepo->menus($tokendecode->roleid)
+      ];
+
+      return response()->json($jsonresponse,200);
     }
 
     /**
@@ -53,7 +57,7 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-
+        //
     }
 
     /**

@@ -20,6 +20,8 @@ Route::post('/login','backend\UserController@login');
 Route::post('/register','backend\UserController@register');
 
 Route::middleware(['authToken'])->group(function(){
+  Route::resource('/menurol','backend\MenuRolController');
+
   Route::resource('/roles','backend\RoleController');
   Route::resource('/permissions','backend\PermissionController');
   Route::resource('/menus','backend\MenuController');

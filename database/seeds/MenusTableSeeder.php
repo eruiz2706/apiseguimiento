@@ -41,5 +41,43 @@ class MenusTableSeeder extends Seeder
           'parent' => $m1->id,
           'order' => 0,
         ]);
+        Menu::create([
+          'name' => 'Menu',
+          'slug' => 'menus',
+          'url' => '/menus',
+          'parent' => $m1->id,
+          'order' => 0,
+        ]);
+
+        Menu::create([
+          'name' => 'Dispositivos',
+          'slug' => 'device',
+          'url' => '/devices',
+          'order' => 0,
+        ]);
+        Menu::create([
+          'name' => 'Geocerca',
+          'slug' => 'geozone',
+          'url' => '/geozones',
+          'order' => 0,
+        ]);
+        Menu::create([
+          'name' => 'Seguimiento',
+          'slug' => 'trackings',
+          'url' => '/trackings',
+          'order' => 0,
+        ]);
+        Menu::create([
+          'name' => 'Mantenimiento',
+          'slug' => 'maintenance',
+          'url' => '/maintenances',
+          'order' => 0,
+        ]);
+        Menu::create([
+          'name' => 'Log de Acceso',
+          'slug' => 'logaccess',
+          'url' => '/logaccess',
+          'order' => 0,
+        ]);
     }
 }
