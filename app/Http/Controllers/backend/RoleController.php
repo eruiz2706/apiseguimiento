@@ -18,7 +18,6 @@ class RoleController extends Controller
     private $tokendecode;
 
     public function __construct(RoleRepository $rolerepo,JwtAuth $jwtAuth,Shinobipermi $shinobipermi){
-        $this->middleware('cors');
         $this->rolerepo     =$rolerepo;
         $this->jwtAuth      =$jwtAuth;
         $this->shinobipermi =$shinobipermi;
@@ -36,11 +35,7 @@ class RoleController extends Controller
 
         $jsonresponse=[
             'status' =>'success',
-            'data'=>$this->rolerepo->all(),
-            'permit'=>[
-                'access' =>$this->shinobipermi->canrol($tokendecode->roleid,'roles.access'),
-                'index' =>$this->shinobipermi->canrol($tokendecode->roleid,'roles.index'),
-            ]
+            'data'=>$this->rolerepo->all()
         ];
         return response()->json($jsonresponse,200);
     }
@@ -82,7 +77,7 @@ class RoleController extends Controller
         $name          =isset($params->name) ? $params->name : null;
         $slug          =isset($params->slug) ? $params->slug : null;
         $description   =isset($params->description) ? $params->description : null;
-        $special       =isset($params->description) ? $params->special : null;
+        $special       =isset($params->special) ? $params->special : null;
 
         $attributes =[
           'name'  =>$name,
@@ -154,9 +149,10 @@ class RoleController extends Controller
 
         if ($validator->fails()) {
           return response()->json([
+              'status'=>'error',
               'errors' => $validator->messages(),
               'message' =>'Debe validar los campos obligatorios'
-          ], 400);
+          ], 200);
         }
 
         $name          =isset($params->name) ? $params->name : null;

@@ -26,7 +26,7 @@ abstract class Repository implements InterfaceRepository {
     }
 
     public function find($id,$attributes=['*'],$orderBy=[]){
-        return $this->model->where('id',$id)->get();
+        return $this->model->where('id',$id)->get()->first();
     }
 
     public function findByField($field, $value,$attributes=['*'],$orderBy=[]){
