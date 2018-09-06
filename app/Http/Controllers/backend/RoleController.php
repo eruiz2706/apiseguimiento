@@ -64,6 +64,7 @@ class RoleController extends Controller
         $validator =Validator::make($params_array,[
           'name' =>'required|string',
           'slug' =>'required|string|unique:roles,slug',
+          'rol' =>'required',
         ]);
 
         if ($validator->fails()) {
@@ -157,7 +158,7 @@ class RoleController extends Controller
 
         $name          =isset($params->name) ? $params->name : null;
         $description   =isset($params->description) ? $params->description : null;
-        $special       =isset($params->description) ? $params->special : null;
+        $special       =isset($params->special) ? $params->special : null;
 
         $attributes =[
           'name'=>$name,
