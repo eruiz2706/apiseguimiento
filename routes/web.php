@@ -27,7 +27,9 @@ Route::middleware(['authToken'])->group(function(){
   Route::get('/users/{id}/edit','backend\UserController@edit');
   Route::put('/users/{id}','backend\UserController@update');
   Route::resource('/menurol','backend\MenuRolController');
+  Route::resource('/menus','backend\MenuController');
+  Route::resource('/submenus','backend\SubmenuController');
 
   Route::resource('/permissions','backend\PermissionController');
-  Route::resource('/menus','backend\MenuController');
+
 });
