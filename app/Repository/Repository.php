@@ -25,27 +25,27 @@ abstract class Repository implements InterfaceRepository {
        return $model;
     }
 
-    public function find($id,$attributes=['*'],$orderBy=[]){
+    public function find($id,$attributes=['*']){
         return $this->model->where('id',$id)->get()->first();
     }
 
-    public function findByField($field, $value,$attributes=['*'],$orderBy=[]){
+    public function findByField($field,$value,$attributes=['*'],$orderBy=[]){
 
     }
 
-    public function findWhere(array $where,$attributes=['*'],$orderBy=[]){
+    public function findWhere($where=[],$attributes=['*'],$orderBy=[]){
 
     }
 
-    public function findWhereIn($field, array $where,$attributes=['*'],$orderBy=[]){
+    public function findWhereIn($where=[],$attributes=['*'],$orderBy=[]){
 
     }
 
-    public function findWhereNotIn($field,array $where,$attributes=['*'],$orderBy=[]){
+    public function findWhereNotIn($field,$where=[],$attributes=['*'],$orderBy=[]){
 
     }
 
-    public function create($attributes=[]){
+    public function create($attributes=[],$optional=[]){
         $return =(Object)[
             'response' => false,
         ];
@@ -63,7 +63,7 @@ abstract class Repository implements InterfaceRepository {
         return $return;
     }
 
-    public function update($id,$attributes=[]){
+    public function update($id,$attributes=[],$optional=[]){
         $return =(Object)[
             'response' => false,
         ];

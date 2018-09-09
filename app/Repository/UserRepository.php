@@ -11,7 +11,7 @@ class UserRepository extends Repository{
      parent::__construct($model);
   }
 
-  public function alldata(){
+  public function allwithrol(){
     $data  =DB::select("select u.id,u.name,u.email,ru.role_id as idrol,r.name as nomrol
                         from users u
                         left join role_user ru on(u.id=ru.user_id)
@@ -21,7 +21,7 @@ class UserRepository extends Repository{
      return $data;
   }
 
-  public function createuser($attributes=[],$params=[]){
+  public function create($attributes=[],$params=[]){
       $return =(Object)[
           'response' => false,
       ];
@@ -50,7 +50,7 @@ class UserRepository extends Repository{
       return $return;
   }
 
-  public function updateuser($id,$attributes=[],$params=[]){
+  public function update($id,$attributes=[],$params=[]){
       $return =(Object)[
           'response' => false,
       ];
@@ -80,7 +80,7 @@ class UserRepository extends Repository{
       return $return;
   }
 
-  public function find($id,$attributes=['*'],$orderBy=[]){
+  public function find($id,$attributes=['*']){
       $user   =$this->model->where('id',$id)->get()->first();
 
       $rol  =DB::select("select role_id

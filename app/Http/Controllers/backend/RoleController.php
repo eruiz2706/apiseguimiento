@@ -63,8 +63,7 @@ class RoleController extends Controller
 
         $validator =Validator::make($params_array,[
           'name' =>'required|string',
-          'slug' =>'required|string|unique:roles,slug',
-          'rol' =>'required',
+          'slug' =>'required|string|unique:roles,slug'
         ]);
 
         if ($validator->fails()) {
@@ -128,7 +127,12 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+      $role         =$this->rolerepo->find($id);
+      $jsonresponse=[
+          'status' =>'success',
+          'data'=>$role
+      ];
+      return response()->json($jsonresponse,200);
     }
 
     /**

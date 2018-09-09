@@ -20,7 +20,7 @@ class CreateMenusTable extends Migration
             $table->unsignedInteger('parent')->default(0);
             $table->string('url',300)->nullable();;
             $table->string('icono',100)->nullable();;
-            $table->smallInteger('order')->default(0);
+            $table->smallInteger('orden')->default(0);
             $table->boolean('enabled')->default(1);
             $table->timestamps();
         });

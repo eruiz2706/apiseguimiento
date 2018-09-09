@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Menu extends Model
 {
     protected $table = 'menus';
-    protected $fillable =['name','slug','parent','url','icono','order','enabled'];
+    protected $fillable =['name','slug','parent','url','icono','orden','enabled'];
 
     public function getChildren($data, $line)
     {
@@ -23,7 +23,7 @@ class Menu extends Model
     {
         return $this->where('enabled', 1)
             ->orderby('parent')
-            ->orderby('order')
+            ->orderby('orden')
             ->orderby('name')
             ->get()
             ->toArray();
@@ -32,7 +32,7 @@ class Menu extends Model
     public function optionsMenuList()
     {
         return $this->orderby('parent')
-            ->orderby('order')
+            ->orderby('orden')
             ->orderby('name')
             ->get()
             ->toArray();

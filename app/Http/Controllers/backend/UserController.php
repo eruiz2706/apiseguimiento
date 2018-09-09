@@ -72,7 +72,7 @@ class UserController extends Controller
 
       $jsonresponse=[
           'status' =>'success',
-          'data'=>$this->userrepo->alldata()
+          'data'=>$this->userrepo->allwithrol()
       ];
       return response()->json($jsonresponse,200);
     }
@@ -145,7 +145,7 @@ class UserController extends Controller
         $params=[
           'rol'=>$rol
         ];
-        $return   =$this->userrepo->createuser($attributes,$params);
+        $return   =$this->userrepo->create($attributes,$params);
 
         if($return->response){
           return response()->json([
@@ -168,7 +168,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request,$id)
+    public function edit(Request $request,$id)
     {
       $user         =$this->userrepo->find($id);
       $selectroles  =$this->rolrepo->all();
@@ -234,7 +234,7 @@ class UserController extends Controller
           $attributes['password']=$pwd;
         }
 
-        $return   =$this->userrepo->updateuser($id,$attributes,$optional);
+        $return   =$this->userrepo->update($id,$attributes,$optional);
 
         if($return->response){
           return response()->json([

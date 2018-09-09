@@ -128,7 +128,13 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        //
+      $permission         =$this->permissionrepo->find($id);
+
+      $jsonresponse=[
+          'status' =>'success',
+          'data'=>$permission
+      ];
+      return response()->json($jsonresponse,200);
     }
 
     /**
