@@ -104,4 +104,19 @@ class MenuRolController extends Controller
     {
         //
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function access(Request $request,$id)
+    {
+      $jsonresponse=[
+          'status' =>'success',
+          'data'=>$this->menurolrepo->menuaccess($id)
+      ];
+
+      return response()->json($jsonresponse,200);
+    }
 }
